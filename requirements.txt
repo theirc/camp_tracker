@@ -11,8 +11,6 @@ gunicorn==19.3.0
 MySQL-python==1.2.5
 Pillow==3.0.0
 psycopg2==2.6.1
-pyspatialite===2.6.2-spatialite.2.4.0-4
-pysqlite==2.6.3
 python-dateutil==2.4.2
 requests==2.8.1
 simplejson==3.8.0
