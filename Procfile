@@ -1,0 +1,1 @@
+web: gunicorn camp_mapping.wsgi --log-file
