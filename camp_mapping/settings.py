@@ -134,13 +134,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'rieu_page_cache',
-    }
-}
-
 try:
     from local_settings import *
 except ImportError:
