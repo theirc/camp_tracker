@@ -134,6 +134,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+
+KOBO_USERNAME = os.environ.get('KOBO_USERNAME')
+KOBO_PASSWORD = os.environ.get('KOBO_PASSWORD')
+
+
 try:
     from local_settings import *
 except ImportError:
