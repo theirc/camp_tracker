@@ -14,7 +14,7 @@ def index(request):
     serialized = [{
         "camp_id": s.camp.id,
         "shelter_id": s.shelter_id,
-        "location": json.loads(s.location.json),
+        "location": {"coordinates": [s.location.x, s.location.y]}, #json.loads(s.location.json),
         "occupants": s.occupants,
     } for s in shelters]
 
@@ -22,7 +22,6 @@ def index(request):
 
     camp = {
         "name": c.camp_name,
-        "location": json.loads(c.camp_polygon.json),
     }
 
     return render_to_response("index.html", {
