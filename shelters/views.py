@@ -31,4 +31,7 @@ def index(request):
     }, RequestContext(request))
 
 def list(request):
-    return render_to_response("list.html", {}, RequestContext(request))
+    shelters = models.Shelter.objects.order_by('occupants')
+    return render_to_response("list.html", {
+        "shelters": shelters,
+    }, RequestContext(request))
