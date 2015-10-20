@@ -1,0 +1,5 @@
+local_settings.py[ooc]
+/camp_mapping/local_settings.py
+*.sqlite3
+.idea
+*.py[ocd]
