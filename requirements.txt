@@ -3,8 +3,6 @@ django-extensions==1.5.7
 djangorestframework==3.2.4
 MySQL-python==1.2.5
 Pillow==3.0.0
-pyspatialite===2.6.2-spatialite.2.4.0-4
-pysqlite==2.6.3
 python-dateutil==2.4.2
 requests==2.8.1
 six==1.10.0
