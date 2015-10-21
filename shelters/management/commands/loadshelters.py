@@ -42,10 +42,10 @@ class Command(BaseCommand):
 
         camp_dict = {}
 
-        for d in shelter_data:
+        for d in [a for a in shelter_data if a["shelter/gps_location"]]:
             gps = [float(a) for a in d['shelter/gps_location'].split(' ')]
             camp_id = int(d['camp_id'])
-            shelter_id = d['shelter/Shelter_Identifier']
+            shelter_id = d['shelter/type_of_shelter'] + ' ' + d['shelter/Shelter_Identifier']
             shelter_type = shelter_type_dict[d['shelter/type_of_shelter']]
 
             point = geos.Point(gps[1], gps[0])
@@ -85,7 +85,7 @@ class Command(BaseCommand):
                 shelter.save()
 
         for d in sorted(occupants_data, key=lambda k: k['end'], reverse=True):
-            shelter = models.Shelter.objects.filter(shelter_id=d['shelter/Shelter_Identifier'])
+            shelter = models.Shelter.objects.filter(shelter_id=d['shelter/type_of_shelter'] + ' ' + d['shelter/Shelter_Identifier'])
             if shelter:
                 shelter = shelter[0]
                 end = parser.parse(d['end'])
