@@ -7,7 +7,7 @@ from . import models
 
 
 class ShelterAdmin(admin.GeoModelAdmin):
-    list_display = ('camp', 'shelter_id', 'occupants', 'capacity')
+    list_display = ('camp', 'shelter_id', 'type', 'occupants', 'capacity')
 
 
 admin.site.register(models.Camp, admin.GeoModelAdmin)

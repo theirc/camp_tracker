@@ -7,7 +7,8 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
+                <th>Type</th>
+                <th>Id</th>
                 <th>Capacity</th>
                 <th>Occupants</th>
                 <th>Last Updated On</th>
@@ -16,6 +17,7 @@
             <tbody>
             {% for s in shelters %}
             <tr>
+                <td>{{ s.get_type_display }}</td>
                 <td>{{ s.shelter_id }}</td>
                 <td>{{ s.capacity }}</td>
                 <td>{{ s.occupants }}</td>

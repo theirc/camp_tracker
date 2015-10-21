@@ -42,17 +42,18 @@ class Command(BaseCommand):
 
         camp_dict = {}
 
-        for d in [a for a in shelter_data if a["shelter/gps_location"]]:
+        for d in [a for a in shelter_data if 'shelter/gps_location' in a and a["shelter/gps_location"]]:
             gps = [float(a) for a in d['shelter/gps_location'].split(' ')]
             camp_id = int(d['camp_id'])
-            shelter_id = d['shelter/type_of_shelter'] + ' ' + d['shelter/Shelter_Identifier']
+            shelter_key = d['shelter/type_of_shelter'] + ' ' + d['shelter/Shelter_Identifier']
+            shelter_id = d['shelter/Shelter_Identifier']
             shelter_type = shelter_type_dict[d['shelter/type_of_shelter']]
 
             point = geos.Point(gps[1], gps[0])
-            if shelter_id not in camp_dict:
-                camp_dict[shelter_id] = []
+            if shelter_key not in camp_dict:
+                camp_dict[shelter_key] = []
 
-            camp_dict[shelter_id].append({
+            camp_dict[shelter_key].append({
                 "camp_id": camp_id,
                 "shelter_id": shelter_id,
                 "shelter_type": shelter_type,
@@ -78,14 +79,15 @@ class Command(BaseCommand):
                 shelter_type = info['shelter_type']
 
                 camp = models.Camp.objects.get(camp_id=camp_id)
-                shelter, other = models.Shelter.objects.get_or_create(shelter_id=shelter_id, camp=camp)
+                shelter, other = models.Shelter.objects.get_or_create(shelter_id=shelter_id, type=shelter_type, camp=camp)
                 shelter.type = shelter_type
                 shelter.camp = camp
                 shelter.location = point
                 shelter.save()
 
         for d in sorted(occupants_data, key=lambda k: k['end'], reverse=True):
-            shelter = models.Shelter.objects.filter(shelter_id=d['shelter/type_of_shelter'] + ' ' + d['shelter/Shelter_Identifier'])
+            shelter_type = shelter_type_dict[d['shelter/type_of_shelter']]
+            shelter = models.Shelter.objects.filter(shelter_id=d['shelter/Shelter_Identifier'], type=shelter_type)
             if shelter:
                 shelter = shelter[0]
                 end = parser.parse(d['end'])
