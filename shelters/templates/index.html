@@ -34,7 +34,7 @@
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent(shelterData[i].shelter_id);
+                        infowindow.setContent(shelterData[i].type + ' - ' + shelterData[i].shelter_id);
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
