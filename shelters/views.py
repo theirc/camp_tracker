@@ -13,6 +13,7 @@ def index(request):
     shelters = models.Shelter.objects.order_by('occupants')
     serialized = [{
         "camp_id": s.camp.id,
+        "type": s.get_type_display(),
         "shelter_id": s.shelter_id,
         "location": {"coordinates": [s.location.x, s.location.y]}, #json.loads(s.location.json),
         "occupants": s.occupants,
