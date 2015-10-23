@@ -30,7 +30,7 @@ def index(request):
     }, RequestContext(request))
 
 def list(request):
-    shelters = models.Shelter.objects.order_by('occupants', 'type', 'shelter_idgit ')
+    shelters = models.Shelter.objects.order_by('occupants', 'type', 'shelter_id ')
     return render_to_response("list.html", {
         "shelters": shelters,
     }, RequestContext(request))
